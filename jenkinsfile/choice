@@ -16,10 +16,7 @@ pipeline {
         
         stage("deploy") {
             steps {
-                sh "wsl --install"
-                sh "cd my-app/target"
-                sh "sudo su"
-                sh "cp app.war /opt/tomcat/webapps"
+               sh "cp target/app.war /opt/tomcat/webapps"
             }
         }
     }
