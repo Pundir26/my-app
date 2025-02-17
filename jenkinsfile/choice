@@ -1,37 +1,26 @@
 pipeline {
-    agent {
-        label 'demm' 
-    }
-    parameters{
-          choice choices: ['172.17.0.3', '172.17.0.4'], description: 'kk', name: 'deployEnv'
-    }
+    agent any
+    
     stages {
-        stage("clone")
-        {
-        steps{
+        stage("clone") {
+            steps {
                 git branch: "main", url: "https://github.com/Pundir26/my-app.git"
             }
-
         }
-        stage("Build")
-        {
-        steps{
-            sh "mvn package"
+        
+        stage("Build") {
+            steps {
+                sh "mvn package"
             }
-
         }
-        stage("deploy")
-        {
-            steps
-            {
+        
+        stage("deploy") {
+            steps {
                 sh "wsl --install"
                 sh "cd my-app/target"
                 sh "sudo su"
-                sh "cp app.war /opt/tomcat/webapps
-
+                sh "cp app.war /opt/tomcat/webapps"
             }
-
         }
-        
     }
 }
