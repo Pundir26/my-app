@@ -24,7 +24,10 @@ pipeline {
         {
             steps
             {
-                sh "scp target/app.war sp@${deployEnv}:/home/sp/apache-tomcat-9.0.83/webapps"
+                sh "wsl --install"
+                sh "cd my-app/target"
+                sh "sudo su"
+                sh "cp app.war /opt/tomcat/webapps
 
             }
 
